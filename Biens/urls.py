@@ -7,7 +7,9 @@ app_name = "Biens"
 
 urlpatterns = [
       path('', Affichage.as_view(), name='biens'),
+      path('categorie', AffichageCat.as_view(), name='categorie'),
       path('ajout/', AjoutBiens.as_view(), name='ajout'),
+      path('ajoutCat/', AjoutCat.as_view(), name='ajoutCat'),
       path('delete/<int:pk>/', delete.as_view(), name='delete'),
       path('supprimer/<int:pk>/', Supprimer.as_view(), name='supprimer'),
       path('modication/<int:pk>/', update_donnees.as_view(), name='modifier'),

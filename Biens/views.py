@@ -41,6 +41,14 @@ class Affichage(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Biens.objects.filter(est_supprimer=False)  # Afficher uniquement les biens actifs
 
+
+class AffichageCat(LoginRequiredMixin, ListView):
+    context_object_name = 'categorie'
+    # Affichage du template
+    model = Categories
+    template_name = 'categorie.html'
+
+
 @login_required(login_url='login')
 def recherche(request):
 
@@ -61,6 +69,17 @@ class AjoutBiens(LoginRequiredMixin, CreateView):
     template_name = 'ajout_biens.html'
     # redirection après enregistrement 
     success_url = reverse_lazy('Biens:biens') 
+
+class AjoutCat(LoginRequiredMixin, CreateView):
+
+    # utilisation du modele
+    model = Categories
+    # specifier le forulaire à utiliser
+    form_class = formCat
+    # afichage du template
+    template_name = 'ajoutCat.html'
+    # redirection après enregistrement 
+    success_url = reverse_lazy('Biens:categorie') 
 
 
    
@@ -128,3 +147,10 @@ class edit(LoginRequiredMixin, DetailView):
     model = Biens
     template_name = 'detailBiens.html'
     context_object_name = 'n'
+ 
+class edit(LoginRequiredMixin, DetailView):
+
+    model = Categories
+    template_name = 'categorie.html'
+    context_object_name = 'nC'
+ 

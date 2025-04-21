@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Biens
+from .models import *
 from django import forms 
 
 
@@ -72,8 +72,6 @@ class formBiens(ModelForm):
                 }
             ),
         }
-
-
     def __init__(self, *args, **kwargs):
         super(formBiens, self).__init__(*args, **kwargs)
         self.fields['nom'].error_messages = {
@@ -97,4 +95,26 @@ class formBiens(ModelForm):
             'invalid': 'Veuillez entrer une quartier valide.'
         }
        
-    
+class formCat(ModelForm):
+  
+    class Meta:
+        model = Categories
+        fields = [
+            'name'
+        ]
+
+        widgets = {
+            'name': forms.TextInput(
+                attrs = {
+                    'placeholder': 'Entrez le nom de la categorie',
+                    'class':'form-control'
+                }
+            ),
+        }
+        
+    def __init__(self, *args, **kwargs):
+        super(formCat, self).__init__(*args, **kwargs)
+        self.fields['name'].error_messages = {
+            'required': 'Le nom du biens est obligatoire',
+            'invalid': 'Veuillez entrer un nom correct.'
+        }
